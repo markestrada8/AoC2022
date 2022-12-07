@@ -1,4 +1,3 @@
-
 rows = ['WMLF', 'BZVMF', 'HVRSLQ', 'FSVQPMTJ', 'LSW',
         'FVPMRJW', 'JQCPNRF', 'VHPSZWRB', 'BMJCGHZW']
 stacks = {i + 1: [char for char in rows[i]] for i in range(len(rows))}
@@ -6,8 +5,8 @@ stacks = {i + 1: [char for char in rows[i]] for i in range(len(rows))}
 
 def handle_step(line):
     steps = [int(num) for num in line.split()[1::2]]
-    for i in range(steps[0]):
-        stacks[steps[2]].append(stacks[steps[1]].pop())
+    stacks[steps[2]] += stacks[steps[1]][-steps[0]:]
+    stacks[steps[1]] = stacks[steps[1]][:-steps[0]]
 
 
 with open('data.txt', 'r') as file:
